@@ -9,7 +9,7 @@ var Enemy = function() {
     this.x = 101;
     this.y = Math.floor(Math.random()*171) + 50;
     this.speed = Math.floor(Math.random()*4) + 2;
-    console.log(this.speed);
+
 };
 
 // Update the enemy's position, required method for game
@@ -19,6 +19,11 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed;
+    if (this.x > 505){
+        this.x = 0;
+        this.y = Math.floor(Math.random()*171) + 50;
+        this.speed = Math.floor(Math.random()*4) + 2;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -50,9 +55,11 @@ Player.prototype.update = function(dt) {
     }
     this.change_y = 0;
 };
+
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
 };
+
 Player.prototype.handleInput = function (key){
     if (key === 'left'){
         this.change_x = -100;
@@ -71,8 +78,15 @@ Player.prototype.handleInput = function (key){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
 var allEnemies = [];
 allEnemies.push(new Enemy());
+
+
+for ( var i = 0 ; i < 2 ; i++ ){
+    allEnemies.push(new Enemy());
+}
+
 var player = new Player();
 
 
