@@ -1,7 +1,7 @@
 // udacity : Enemies our player must avoid
 
 var Enemy = function() {
-    // udacity : Variables applied to each of our instances go here,
+    //udacity : Variables applied to each of our instances go here,
     //udacity : we've provided one for you to get started
 
     //udacity :  The image/sprite for our enemies, this uses
@@ -49,7 +49,6 @@ var Player = function () {
     this.y = 404; //initial y coordinate
     this.change_x = 0; //change in x coordinate initialised to 0
     this.change_y = 0; //change in y coordinate initialised to 0
-    this.no_of_lives = 3; //number of times the player can survive a collision with the bug
 };
 Player.prototype.update = function(dt) {
 
@@ -92,17 +91,24 @@ var collide = function (enemy_bug) {
     var dist_x = (player.x)- enemy_bug.x;
     var dist_y = (player.y+100) - enemy_bug.y;
     if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
-            console.log(dist_x);
-            console.log(dist_y);
-            player.x = 202;
-            player.y = 404;
-
+            falldown();
+            //player.x = 220;
+            //player.y = 404;
     }
 };
 
 var randomize = function (max,min) {
     //generates numbers between two given integers
     return (Math.floor(Math.random()*(max-min+1)) + min);
+}
+
+var falldown = function () {
+    console.log("fall");
+    while( player.y < 606){
+        //console.log(player.y);
+        player.y += 10;
+    }
+
 }
 
 //udacity :  Now instantiate your objects.
