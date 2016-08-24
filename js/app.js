@@ -91,9 +91,9 @@ var collide = function (enemy_bug) {
     var dist_x = (player.x)- enemy_bug.x;
     var dist_y = (player.y+100) - enemy_bug.y;
     if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
-            falldown();
-            //player.x = 220;
-            //player.y = 404;
+            //falldown();
+            player.x = 220;
+            player.y = 404;
     }
 };
 
@@ -102,14 +102,14 @@ var randomize = function (max,min) {
     return (Math.floor(Math.random()*(max-min+1)) + min);
 }
 
-var falldown = function () {
-    console.log("fall");
-    while( player.y < 606){
+/*var falldown = function () {
+    //console.log("fall");
+    while( player.y <= 404){
         //console.log(player.y);
-        player.y += 10;
+        player.y = player.y + 10;
     }
 
-}
+}*/
 
 //udacity :  Now instantiate your objects.
 // udacity : Place all enemy objects in an array called allEnemies
