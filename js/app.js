@@ -23,10 +23,10 @@ Enemy.prototype.update = function(dt) {
     //udacity :  which will ensure the game runs at the same speed for
     //udacity :  all computers.
 
-    this.x += this.speed; // update x value using speed
+    this.x += this.speed ; // update x value using speed
 
     //make the bug loop back to the left of the screen with unpredictable y position and speed
-    if (this.x > 505){
+    if (this.x > 505) {
         this.x = 0;
         this.y = this.y_pos_choice[randomize(10,0)];
         this.speed = randomize(6,2);
@@ -89,11 +89,10 @@ Player.prototype.handleInput = function (key){
 var collide = function (enemy_bug) {
     //checks for collisions between the bug and the player. If true, resets the position of the player
     var dist_x = (player.x)- enemy_bug.x;
-    var dist_y = (player.y+100) - enemy_bug.y;
+    var dist_y = (player.y + 100) - enemy_bug.y;
     if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
-            //falldown();
-            player.x = 220;
-            player.y = 404;
+        player.x = 202;
+        player.y = 404;
     }
 };
 
@@ -102,17 +101,9 @@ var randomize = function (max,min) {
     return (Math.floor(Math.random()*(max-min+1)) + min);
 }
 
-/*var falldown = function () {
-    //console.log("fall");
-    while( player.y <= 404){
-        //console.log(player.y);
-        player.y = player.y + 10;
-    }
-
-}*/
 
 //udacity :  Now instantiate your objects.
-// udacity : Place all enemy objects in an array called allEnemies
+//udacity : Place all enemy objects in an array called allEnemies
 //udacity :  Place the player object in a variable called player
 
 var allEnemies = [];
