@@ -60,7 +60,7 @@ Player.prototype.update = function(dt) {
     this.change_x = 0;//reset value
 
     this.y += this.change_y;//change y position
-    if (this.y >= 454 || this.y <= -46 ){
+    if (this.y >= 454 || this.y <= -40 ){
         this.y -= this.change_y; //cancel out the change in position by subtracting it. This keeps the y position constant
     }
     this.change_y = 0;//reset y position
@@ -79,10 +79,10 @@ Player.prototype.handleInput = function (key){
         this.change_x = 50;
     }
     if (key === 'up'){
-        this.change_y = -25;
+        this.change_y = -32;
     }
     if (key === 'down') {
-        this.change_y = 25;
+        this.change_y = 32;
     }
 };
 
@@ -91,11 +91,9 @@ var collide = function (enemy_bug) {
     var dist_x = (player.x)- enemy_bug.x;
     var dist_y = (player.y + 100) - enemy_bug.y;
     if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
-        while (player.y <= 404){
-            player.y += 10;
-        }
-        //player.x = 202;
-        //player.y = 404;
+        
+        player.x = 202;
+        player.y = 404;
     }
 };
 
@@ -122,7 +120,7 @@ var player = new Player();//instantiating a player
 
 // udacity : This listens for key presses and sends the keys to your
 //udacity :  Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
