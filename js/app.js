@@ -50,6 +50,7 @@ var Player = function () {
     this.change_x = 0; //change in x coordinate initialised to 0
     this.change_y = 0; //change in y coordinate initialised to 0
     this.lives = 3; //Initial lives
+
 };
 Player.prototype.update = function(dt) {
 
@@ -61,15 +62,24 @@ Player.prototype.update = function(dt) {
     this.change_x = 0;//reset value
 
     this.y += this.change_y;//change y position
-    if (this.y >= 454 || this.y <= -40 ){
-        this.y -= this.change_y; //cancel out the change in position by subtracting it. This keeps the y position constant
+    if (this.y >= 454 || this.y < -40 ){
+        this.y -= this.change_y; //cancel out the change in position by subtracting it. This keeps the y position
+
     }
+
+    if (this.y === -12){ //winning position for the game, clears off all the enemies and prints the message
+        display('Awesome! Refresh to play again!');
+        allEnemies = [];
+    }
+
     this.change_y = 0;//reset y position
 };
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
 };
+
+
 
 Player.prototype.handleInput = function (key){
     //compares keypresses to the movement and updates the value for change accordingly so that the player moves on the screen
@@ -98,17 +108,39 @@ var collide = function (enemy_bug) {
     if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
         //check for collisions. If both the x and y position fall between this range and collision occurs.
         //Reset the player's position
-        player.x = 202;
-        player.y = 404;
+        player.lives--;//reduce player's life by one when collision occurs
+        resetCollision();
     }
 
 };
 
+
 var randomize = function (max,min) {
     //generates numbers between two given integers
     return (Math.floor(Math.random()*(max-min+1)) + min);
-}
+};
 
+var resetCollision = function () {
+    //resets after collision and displays appropriate message in case the game is over
+    if ( player.lives >= 1 ) {
+        display('Collision! Lives left = ' + player.lives); //lives left
+    }
+    else { //zero lives left, hence game over message printed
+        display('GAME OVER! REFRESH TO PLAY AGAIN');
+    }
+
+    player.x = 202;//reset x position
+    player.y = 404;//reset y position
+
+};
+
+var display = function (par) {
+    //displays string based on the parameter par received
+    var canvas = document.getElementsByTagName('canvas');
+    var firstCanvasTag = canvas[0];
+    Show.innerHTML = par;
+    document.body.insertBefore(Show, firstCanvasTag[0]);
+};
 
 //udacity :  Now instantiate your objects.
 //udacity : Place all enemy objects in an array called allEnemies
@@ -123,6 +155,8 @@ for ( var i = 0 ; i < 5 ; i++ ){//to have more than 1 bug on the screen
 }
 
 var player = new Player();//instantiating a player
+
+var Show = document.createElement('div');
 
 
 // udacity : This listens for key presses and sends the keys to your
