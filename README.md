@@ -8,7 +8,7 @@ The objective of the game is to make the player move over to the water tiles, mo
 Use the arrow keys to move the player up, down, right and left to move him over to the water tiles. Once the player reaches there, he wins the game.
 
 *How to play:*
-Visit this [link]() to play the game or download the zip file, extract it, and open the index.html file in the browser to play the game.
+Visit this [link](https://rimildeyjsr.github.io/Udacity-Front-end-Nanodegree---Arcade-game/) to play the game or download the zip file, extract it, and open the index.html file in the browser to play the game.
 
 *Techniques used for the game:*
 1. Object oriented Javascript
