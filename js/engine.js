@@ -39,6 +39,7 @@ var Engine = (function(global) {
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
+
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
@@ -52,6 +53,7 @@ var Engine = (function(global) {
          * for the next time this function is called.
          */
         lastTime = now;
+
 
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
