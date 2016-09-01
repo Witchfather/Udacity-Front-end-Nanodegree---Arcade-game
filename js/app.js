@@ -32,7 +32,27 @@ Enemy.prototype.update = function(dt) {
         this.speed = randomize(6,2); //randomize the speed to make it unpredictable
     }
 
-    collide(this);//checks for collisions
+    this.collide();
+};
+
+Enemy.prototype.collide = function () {
+    var dist_x = (player.x)- this.x;
+    var dist_y = (player.y + 100) - this.y;
+    if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
+        player.lives--;
+        //Reset Collision
+        if ( player.lives >= 1 ) {
+            display('Collision! Lives left = ' + player.lives); //lives left
+        }
+        else { //zero lives left, hence game over message printed
+            display('GAME OVER! REFRESH TO PLAY AGAIN');
+            allEnemies = [];
+        }
+
+        player.x = 202;//reset x position
+        player.y = 404;//reset y position
+    }
+
 };
 
 //udacity :  Draw the enemy on the screen, required method for game
@@ -101,38 +121,12 @@ Player.prototype.handleInput = function (key){
     }
 };
 
-var collide = function (enemy_bug) {
-    //checks for collisions between the bug and the player. If true, resets the position of the player
-    var dist_x = (player.x)- enemy_bug.x; //take the difference between the x position
-    var dist_y = (player.y + 100) - enemy_bug.y; //take the difference between the y position
-    if ( dist_x >= -5 && dist_x <= 5 && dist_y >= -20 && dist_y <= 20 ) {
-        //check for collisions. If both the x and y position fall between this range and collision occurs.
-        //Reset the player's position
-        player.lives--;//reduce player's life by one when collision occurs
-        resetCollision();
-    }
-
-};
-
 
 var randomize = function (max,min) {
     //generates numbers between two given integers
     return (Math.floor(Math.random()*(max-min+1)) + min);
 };
 
-var resetCollision = function () {
-    //resets after collision and displays appropriate message in case the game is over
-    if ( player.lives >= 1 ) {
-        display('Collision! Lives left = ' + player.lives); //lives left
-    }
-    else { //zero lives left, hence game over message printed
-        display('GAME OVER! REFRESH TO PLAY AGAIN');
-    }
-
-    player.x = 202;//reset x position
-    player.y = 404;//reset y position
-
-};
 
 var display = function (par) {
     //displays string based on the parameter par received
